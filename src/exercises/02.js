@@ -1,7 +1,7 @@
 import React from 'react'
 import formatTime from '../helpers/formatTime'
 
-export default class Exercise02 extends React.Component {
+export default class Solution extends React.Component {
   state = {
     isTimerActive: false,
   }

@@ -14,6 +14,11 @@ export default class Solution extends React.Component {
 
   state = {
     isTimerActive: false,
+    time: this.props.time,
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   handleToggleTimerClick = () => {
@@ -22,6 +27,16 @@ export default class Solution extends React.Component {
     }), () => {
       if (this.props.onTimerToggle) {
         this.props.onTimerToggle(this.state.isTimerActive)
+      }
+
+      clearInterval(this.interval)
+
+      if (this.state.isTimerActive) {
+        this.interval = setInterval(() => {
+          this.setState(state => ({
+            time: state.time + 1
+          }))
+        }, 1000)
       }
     })
   }
@@ -35,7 +50,7 @@ export default class Solution extends React.Component {
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
-            {formatTime(this.props.time)}
+            {formatTime(this.state.time)}
           </div>
 
           <button
