@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.App__nav {
+  flex-shrink: 0;
+}
+
+.App__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Exercise__row {
+  display: flex;
+  flex: 1;
+}
+
+.Exercise__column {
+  flex: 1;
+  border: #000 solid 1px;
+  position: relative;
+  padding: 1rem;
+}
+
+.Exercise__column +
+.Exercise__column {
+  margin-left: 1rem;
+}
+
+.Exercise__label {
+  position: absolute;
+  right: 1rem;
+  color: #bbb;
+}

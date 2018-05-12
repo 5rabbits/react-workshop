@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 
 const exercises = require.context('./exercises', false, /\d+\.js$/)
@@ -9,10 +9,10 @@ const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 
 const App = () => (
   <BrowserRouter>
-    <div>
+    <div className="App">
       <h1>React Workshop</h1>
 
-      <ul>
+      <ul className="App__nav">
         <li>
           <Link to='/'>Inicio</Link>
         </li>
@@ -25,16 +25,18 @@ const App = () => (
 
       <hr />
 
-      <Route exact path='/' component={Home} />
-      <Route path='/:exercise' component={Exercise} />
+      <div className="App__content">
+        <Route exact path='/' component={Home} />
+        <Route path='/:exercise' component={Exercise} />
+      </div>
     </div>
   </BrowserRouter>
 )
 
 const Home = () => (
-  <div>
+  <Fragment>
     <h2>Inicio</h2>
-  </div>
+  </Fragment>
 )
 
 const Exercise = ({ match: { params: { exercise } } }) => {
@@ -42,12 +44,26 @@ const Exercise = ({ match: { params: { exercise } } }) => {
   const SolutionComponent = require(`./solutions/${exercise}`).default
 
   return (
-    <div>
+    <Fragment>
       <h2>{getExerciseName(exercise)}</h2>
 
-      <ExerciseComponent />
-      <SolutionComponent />
-    </div>
+      <div className="Exercise__row">
+        <div className="Exercise__column">
+          <div className="Exercise__label">
+            Tu solución
+          </div>
+
+          <ExerciseComponent />
+        </div>
+        <div className="Exercise__column">
+          <div className="Exercise__label">
+            Resultado esperado
+          </div>
+
+          <SolutionComponent />
+        </div>
+      </div>
+    </Fragment>
   )
 }
 
