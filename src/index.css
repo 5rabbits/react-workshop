@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+@import "~ionicons/dist/css/ionicons.css";
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  font-family: 'Lato', sans-serif;
 }
 
 html,
@@ -53,3 +60,40 @@ body,
   right: 1rem;
   color: #bbb;
 }
+
+
+/* Exercise 02 */
+
+.TimeEntry {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10rem;
+  width: 10rem;
+  padding: 0.5rem;
+  color: #fff;
+  background-color: #3c4fbc;
+  border-radius: 4px;
+}
+
+.TimeEntry__project {
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.TimeEntry__timer {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.TimeEntry__timer__control {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-size: 1em;
+  cursor: pointer;
+}
+

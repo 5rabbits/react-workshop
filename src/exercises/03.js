@@ -1,7 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import formatTime from '../helpers/formatTime'
 
-export default class Exercise02 extends React.Component {
+export default class Exercise03 extends React.Component {
+  static propTypes = {
+    onTimerToggle: PropTypes.func,
+    time: PropTypes.number,
+  }
+
+  static defaultProps = {
+    time: 0,
+  }
+
   state = {
     isTimerActive: false,
   }
@@ -9,7 +19,11 @@ export default class Exercise02 extends React.Component {
   handleToggleTimerClick = () => {
     this.setState(state => ({
       isTimerActive: !state.isTimerActive
-    }))
+    }), () => {
+      if (this.props.onTimerToggle) {
+        this.props.onTimerToggle(this.state.isTimerActive)
+      }
+    })
   }
 
   render() {
@@ -21,7 +35,7 @@ export default class Exercise02 extends React.Component {
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
-            {formatTime(0)}
+            {formatTime(this.props.time)}
           </div>
 
           <button

@@ -5,6 +5,10 @@ const exercises = require.context('./exercises', false, /\d+\.js$/)
   .keys()
   .map(file => file.match(/(\d+)/)[1])
 
+const exercisesRenderers = {
+  '03': Solution => <Solution time={8765} />
+}
+
 const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 
 const App = () => (
@@ -41,7 +45,9 @@ const Home = () => (
 
 const Exercise = ({ match: { params: { exercise } } }) => {
   const ExerciseComponent = require(`./exercises/${exercise}`).default
-  const SolutionComponent = require(`./solutions/${exercise}`).default
+  // const SolutionComponent = require(`./solutions/${exercise}`).default
+
+  const renderer = exercisesRenderers[exercise] || (Solution => <Solution />)
 
   return (
     <Fragment>
@@ -53,14 +59,7 @@ const Exercise = ({ match: { params: { exercise } } }) => {
             Tu solución
           </div>
 
-          <ExerciseComponent />
-        </div>
-        <div className="Exercise__column">
-          <div className="Exercise__label">
-            Resultado esperado
-          </div>
-
-          <SolutionComponent />
+          {renderer(ExerciseComponent)}
         </div>
       </div>
     </Fragment>
