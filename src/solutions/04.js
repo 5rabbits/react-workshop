@@ -28,42 +28,37 @@ export default class TimeEntry extends React.Component {
 
   state = {
     isTimerActive: false,
-
-    /**
-     * ✏️ Usa la propiedad `time` como el valor inicial para el
-     * tiempo transcurrido.
-     */
+    time: this.props.time,
   }
 
-  /**
-   * ✏️ Actualiza el state cuando recibas un nuevo valor para la
-   * propiedad `time`.
-   *
-   * 🦄 https://reactjs.org/docs/react-component.html#the-component-lifecycle
-   */
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.time !== prevState.time) {
+      return {
+        time: nextProps.time
+      }
+    }
 
-  /**
-   * ✏️ Asegúrate de detener el timer antes de desmontar el componente.
-   */
+    return null
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   handleToggleTimerClick = () => {
-    /**
-     * ✏️ Después de mutar el state debes verificar lo siguiente:
-     *   - Si el timer ahora está activo, segundo a segundo debes
-     *     incrementar en 1 el valor del tiempo transcurrido.
-     *   - Si el timer ahora está detenido el tiempo transcurrido
-     *     debe dejar de incrementar.
-     *
-     * 🦄 Esto te ayudará con el incremento segundo a segundo:
-     * https://www.w3schools.com/jsref/met_win_setinterval.asp
-     *
-     * Y recuerda que `setState` soporta las siguientes firmas:
-     *   `setState(newState, callback?)`
-     *   `setState(currentState => newState, callback?)`
-     */
     this.setState(state => ({
       isTimerActive: !state.isTimerActive
-    }))
+    }), () => {
+      clearInterval(this.interval)
+
+      if (this.state.isTimerActive) {
+        this.interval = setInterval(() => {
+          this.setState(state => ({
+            time: state.time + 1
+          }))
+        }, 1000)
+      }
+    })
   }
 
   render() {
@@ -75,8 +70,7 @@ export default class TimeEntry extends React.Component {
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
-            {/* ✏️ Despliega el tiempo transcurrido */}
-            {formatTime(this.props.time)}
+            {formatTime(this.state.time)}
           </div>
 
           <button

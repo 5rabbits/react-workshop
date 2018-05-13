@@ -38,6 +38,19 @@ describe('Ejercicio 4', () => {
     })
   })
 
+  describe('si el componente recibe un nuevo valor para la propiedad "time"', () => {
+    it('debe respetar el nuevo valor recibido', () => {
+      const component = mount(<Solution />)
+      const setState = jest.fn()
+
+      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
+
+      component.setProps({ time: 60 })
+
+      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:01:00')
+    })
+  })
+
   describe('al desmontar el componente', () => {
     it('el tiempo debe dejar de incrementar', () => {
       const component = mount(<Solution />)

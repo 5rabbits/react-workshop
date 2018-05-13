@@ -5,10 +5,6 @@ const exercises = require.context('./exercises', false, /\d+\.js$/)
   .keys()
   .map(file => file.match(/(\d+)/)[1])
 
-const exercisesRenderers = {
-  '03': Solution => <Solution time={8765} />
-}
-
 const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 
 const App = () => (
@@ -44,26 +40,83 @@ const Home = () => (
 )
 
 const Exercise = ({ match: { params: { exercise } } }) => {
-  const ExerciseComponent = require(`./exercises/${exercise}`).default
-  // const SolutionComponent = require(`./solutions/${exercise}`).default
+  const UserSolution = require(`./exercises/${exercise}`).default
+  const Solution = require(`./solutions/${exercise}`).default
+  const renderer = exercisesRenderers[exercise] || exercisesRenderers.default
 
-  const renderer = exercisesRenderers[exercise] || (Solution => <Solution />)
-
-  return (
-    <Fragment>
-      <h2>{getExerciseName(exercise)}</h2>
-
-      <div className="Exercise__row">
-        <div className="Exercise__column">
-          <div className="Exercise__label">
-            Tu solución
-          </div>
-
-          {renderer(ExerciseComponent)}
-        </div>
-      </div>
-    </Fragment>
-  )
+  return renderer({
+    exerciseNumber: exercise,
+    UserSolution,
+    Solution,
+  })
 }
+
+const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
+  <Fragment>
+    <h2>{getExerciseName(exerciseNumber)}</h2>
+
+    <div className="Exercise__row">
+      <div className="Exercise__column">
+        <div className="Exercise__label">
+          Tu solución
+        </div>
+
+        {userSolution}
+      </div>
+
+      <div className="Exercise__column">
+        <div className="Exercise__label">
+          Resultado esperado
+        </div>
+
+        {solution}
+      </div>
+    </div>
+  </Fragment>
+)
+
+const exercisesRenderers = {
+  'default': ({ UserSolution, Solution, exerciseNumber }) => (
+    <ExercisePanel
+      exerciseNumber={exerciseNumber}
+      solution={<Solution />}
+      userSolution={<UserSolution />}
+    />
+  ),
+  '02': ({ UserSolution, Solution, exerciseNumber }) => {
+    const time = Math.round(Math.random() * 10000)
+
+    return (
+      <ExercisePanel
+        exerciseNumber={exerciseNumber}
+        solution={<Solution time={time} />}
+        userSolution={<UserSolution time={time} />}
+      />
+    )
+  },
+  '03': ({ UserSolution, Solution, exerciseNumber }) => {
+    const time = Math.round(Math.random() * 10000)
+
+    return (
+      <ExercisePanel
+        exerciseNumber={exerciseNumber}
+        solution={<Solution time={time} />}
+        userSolution={<UserSolution time={time} />}
+      />
+    )
+  },
+  '04': ({ UserSolution, Solution, exerciseNumber }) => {
+    const time = Math.round(Math.random() * 10000)
+
+    return (
+      <ExercisePanel
+        exerciseNumber={exerciseNumber}
+        solution={<Solution time={time} />}
+        userSolution={<UserSolution time={time} />}
+      />
+    )
+  },
+}
+
 
 export default App

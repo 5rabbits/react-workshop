@@ -1,5 +1,5 @@
 /**
- * Ejercicio 3 - State, eventos, render condicional
+ * Ejercicio 3 - State
  *
  * 🏆 Objetivos:
  *   1. Define el estado `isTimerActive` con valor inicial `false`.
@@ -21,17 +21,15 @@ export default class TimeEntry extends React.Component {
     time: 0,
   }
 
-  /**
-   * ✏️ Define el state inicial del componente.
-   *
-   * 🦄 https://reactjs.org/docs/state-and-lifecycle.html
-   */
+  state = {
+    isTimerActive: false
+  }
 
-   /**
-   * ✏️ Define un handler para el click del botón.
-   *
-   * 🦄 https://reactjs.org/docs/handling-events.html
-   */
+  handleToggleTimerClick = () => {
+    this.setState(state => ({
+      isTimerActive: !state.isTimerActive
+    }))
+  }
 
   render() {
     return (
@@ -42,26 +40,18 @@ export default class TimeEntry extends React.Component {
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
-            {formatTime(0)}
+            {formatTime(this.props.time)}
           </div>
 
           <button
             className="TimeEntry__timer__control"
+            onClick={this.handleToggleTimerClick}
             type="button"
-            /**
-             * ✏️ Reacciona al click para ejecutar el handler que definiste
-             * anteriormente.
-             *
-             * 🦄 `onClick={fn}`
-             */
           >
-            {/**
-              * ✏️ Dependiendo del estado actual, debes mostrar uno de los
-              * siguientes iconos.
-            */}
-
-            {/* <i className="icon ion-md-play" /> */}
-            {/* <i className="icon ion-md-pause" /> */}
+            {this.state.isTimerActive
+              ? <i className="icon ion-md-pause" />
+              : <i className="icon ion-md-play" />
+            }
           </button>
         </div>
       </div>
