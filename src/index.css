@@ -25,17 +25,61 @@ body,
 .App {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem;
+}
+
+.App__wrapper {
+  flex: 1;
+  display: flex;
 }
 
 .App__nav {
   flex-shrink: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.App__nav a {
+  display: inline-block;
+  color: #4c5f71;
+  text-decoration: none;
+  font-size: 0.9em;
+  position: relative;
+  cursor: pointer;
+}
+
+.App__nav a:hover,
+.App__nav a.active {
+  color: #19222b;
+}
+
+.App__nav a.active::after {
+  content: '';
+  background-color: #0F82F5;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  transform: translate3d(-100%, -50%, 0);
+}
+
+.App__nav li + li a {
+  margin-top: 0.5rem;
 }
 
 .App__content {
+  margin-left: 5rem;
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.App__content h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .Exercise__row {
@@ -45,8 +89,15 @@ body,
 
 .Exercise__column {
   flex: 1;
-  border: #000 solid 1px;
+  background-color: #EFF2F4;
+  border: #ddd solid 1px;
+  border-radius: 4px;
   position: relative;
+}
+
+.Exercise__panel {
+  height: 100%;
+  overflow: auto;
   padding: 1rem;
 }
 
@@ -58,7 +109,9 @@ body,
 .Exercise__label {
   position: absolute;
   right: 1rem;
-  color: #bbb;
+  top: 1rem;
+  color: #8493a2;
+  font-size: 0.8em;
 }
 
 

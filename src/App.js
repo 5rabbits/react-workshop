@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 
 const exercises = require.context('./exercises', false, /\d+\.js$/)
   .keys()
@@ -10,24 +10,26 @@ const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 const App = () => (
   <BrowserRouter>
     <div className="App">
-      <h1>React Workshop</h1>
-
-      <ul className="App__nav">
-        <li>
-          <Link to='/'>Inicio</Link>
-        </li>
-        {exercises.map(exercise => (
-          <li key={exercise}>
-            <Link to={`/${exercise}`}>{getExerciseName(exercise)}</Link>
+      <div className="App__wrapper">
+        <ul className="App__nav">
+          <li>
+            <NavLink to='/' exact>
+              Inicio
+            </NavLink>
           </li>
-        ))}
-      </ul>
+          {exercises.map(exercise => (
+            <li key={exercise}>
+              <NavLink to={`/${exercise}`}>
+                {getExerciseName(exercise)}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-      <hr />
-
-      <div className="App__content">
-        <Route exact path='/' component={Home} />
-        <Route path='/:exercise' component={Exercise} />
+        <div className="App__content">
+          <Route exact path='/' component={Home} />
+          <Route path='/:exercise' component={Exercise} />
+        </div>
       </div>
     </div>
   </BrowserRouter>
@@ -35,7 +37,7 @@ const App = () => (
 
 const Home = () => (
   <Fragment>
-    <h2>Inicio</h2>
+    <h1>React Workshop</h1>
   </Fragment>
 )
 
@@ -53,7 +55,7 @@ const Exercise = ({ match: { params: { exercise } } }) => {
 
 const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
   <Fragment>
-    <h2>{getExerciseName(exerciseNumber)}</h2>
+    <h1>{getExerciseName(exerciseNumber)}</h1>
 
     <div className="Exercise__row">
       <div className="Exercise__column">
@@ -61,7 +63,9 @@ const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
           Tu solución
         </div>
 
-        {userSolution}
+        <div className="Exercise__panel">
+          {userSolution}
+        </div>
       </div>
 
       <div className="Exercise__column">
@@ -69,7 +73,9 @@ const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
           Resultado esperado
         </div>
 
-        {solution}
+        <div className="Exercise__panel">
+          {solution}
+        </div>
       </div>
     </div>
   </Fragment>
