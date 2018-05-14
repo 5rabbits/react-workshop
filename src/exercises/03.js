@@ -54,6 +54,8 @@ export default class TimeEntry extends React.Component {
             {/**
              * ✏️ Dependiendo del estado actual, debes mostrar uno de los
              * siguientes iconos.
+             *
+             * 🦄 https://reactjs.org/docs/conditional-rendering.html
              */}
 
             {/* <i className="icon ion-md-play" /> */}

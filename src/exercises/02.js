@@ -4,7 +4,7 @@
  * 🏆 Objetivos:
  *   1. Valida que la propiedad `time` sea un número y que sea opcional.
  *   2. Si no se especifica `time`, asígnale el valor `0` por defecto.
- *   3. Usa `formatTime` para mostrar el tiempo especifiado en la propiedad `time`.
+ *   3. Usa `formatTime` para mostrar el tiempo especificado en la propiedad `time`.
  */
 
 import React from 'react'
