@@ -39,7 +39,9 @@ describe('Ejercicio 3', () => {
 
       component.setState({ isTimerActive: false })
 
-      expect(component.find('.TimeEntry__timer__control i')).toHaveClassName('icon ion-md-play')
+      expect(component.find('.TimeEntry__timer__control i')).toHaveClassName(
+        'icon ion-md-play'
+      )
     })
   })
 
@@ -49,7 +51,9 @@ describe('Ejercicio 3', () => {
 
       component.setState({ isTimerActive: true })
 
-      expect(component.find('.TimeEntry__timer__control i')).toHaveClassName('icon ion-md-pause')
+      expect(component.find('.TimeEntry__timer__control i')).toHaveClassName(
+        'icon ion-md-pause'
+      )
     })
   })
 })

@@ -34,7 +34,7 @@ export default class TimeEntry extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.time !== prevState.time) {
       return {
-        time: nextProps.time
+        time: nextProps.time,
       }
     }
 
@@ -46,27 +46,28 @@ export default class TimeEntry extends React.Component {
   }
 
   handleToggleTimerClick = () => {
-    this.setState(state => ({
-      isTimerActive: !state.isTimerActive
-    }), () => {
-      clearInterval(this.interval)
+    this.setState(
+      state => ({
+        isTimerActive: !state.isTimerActive,
+      }),
+      () => {
+        clearInterval(this.interval)
 
-      if (this.state.isTimerActive) {
-        this.interval = setInterval(() => {
-          this.setState(state => ({
-            time: state.time + 1
-          }))
-        }, 1000)
+        if (this.state.isTimerActive) {
+          this.interval = setInterval(() => {
+            this.setState(state => ({
+              time: state.time + 1,
+            }))
+          }, 1000)
+        }
       }
-    })
+    )
   }
 
   render() {
     return (
       <div className="TimeEntry">
-        <div className="TimeEntry__project">
-          React Workshop
-        </div>
+        <div className="TimeEntry__project">React Workshop</div>
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
@@ -78,10 +79,11 @@ export default class TimeEntry extends React.Component {
             onClick={this.handleToggleTimerClick}
             type="button"
           >
-            {this.state.isTimerActive
-              ? <i className="icon ion-md-pause" />
-              : <i className="icon ion-md-play" />
-            }
+            {this.state.isTimerActive ? (
+              <i className="icon ion-md-pause" />
+            ) : (
+              <i className="icon ion-md-play" />
+            )}
           </button>
         </div>
       </div>

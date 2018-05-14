@@ -27,7 +27,7 @@ export default class TimeEntry extends React.Component {
    * 🦄 https://reactjs.org/docs/state-and-lifecycle.html
    */
 
-   /**
+  /**
    * ✏️ Define un handler para el click del botón.
    *
    * 🦄 https://reactjs.org/docs/handling-events.html
@@ -36,14 +36,10 @@ export default class TimeEntry extends React.Component {
   render() {
     return (
       <div className="TimeEntry">
-        <div className="TimeEntry__project">
-          React Workshop
-        </div>
+        <div className="TimeEntry__project">React Workshop</div>
 
         <div className="TimeEntry__timer">
-          <div className="TimeEntry__timer__time">
-            {formatTime(0)}
-          </div>
+          <div className="TimeEntry__timer__time">{formatTime(0)}</div>
 
           <button
             className="TimeEntry__timer__control"
@@ -56,9 +52,9 @@ export default class TimeEntry extends React.Component {
              */
           >
             {/**
-              * ✏️ Dependiendo del estado actual, debes mostrar uno de los
-              * siguientes iconos.
-            */}
+             * ✏️ Dependiendo del estado actual, debes mostrar uno de los
+             * siguientes iconos.
+             */}
 
             {/* <i className="icon ion-md-play" /> */}
             {/* <i className="icon ion-md-pause" /> */}

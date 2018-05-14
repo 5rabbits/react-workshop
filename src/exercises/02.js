@@ -28,9 +28,7 @@ export default class TimeEntry extends React.Component {
   render() {
     return (
       <div className="TimeEntry">
-        <div className="TimeEntry__project">
-          React Workshop
-        </div>
+        <div className="TimeEntry__project">React Workshop</div>
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">

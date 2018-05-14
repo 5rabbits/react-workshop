@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 
-const defaultExerciseRenderer = ({ UserSolution, Solution, exerciseNumber }) => (
+const defaultExerciseRenderer = ({
+  UserSolution,
+  Solution,
+  exerciseNumber,
+}) => (
   <ExercisePanel
     exerciseNumber={exerciseNumber}
     solution={<Solution />}
@@ -54,22 +58,20 @@ const App = () => (
       <div className="App__wrapper">
         <ul className="App__nav">
           <li>
-            <NavLink to='/' exact>
+            <NavLink to="/" exact>
               Inicio
             </NavLink>
           </li>
           {Object.keys(exercises).map(exercise => (
             <li key={exercise}>
-              <NavLink to={`/${exercise}`}>
-                {getExerciseName(exercise)}
-              </NavLink>
+              <NavLink to={`/${exercise}`}>{getExerciseName(exercise)}</NavLink>
             </li>
           ))}
         </ul>
 
         <div className="App__content">
-          <Route exact path='/' component={Home} />
-          <Route path='/:exercise' component={Exercise} />
+          <Route exact path="/" component={Home} />
+          <Route path="/:exercise" component={Exercise} />
         </div>
       </div>
     </div>
@@ -82,7 +84,11 @@ const Home = () => (
   </Fragment>
 )
 
-const Exercise = ({ match: { params: { exercise } } }) => {
+const Exercise = ({
+  match: {
+    params: { exercise },
+  },
+}) => {
   const UserSolution = require(`./exercises/${exercise}`).default
   const Solution = require(`./solutions/${exercise}`).default
   const renderer = exercises[exercise]
@@ -100,23 +106,15 @@ const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
 
     <div className="Exercise__row">
       <div className="Exercise__column">
-        <div className="Exercise__label">
-          Tu solución
-        </div>
+        <div className="Exercise__label">Tu solución</div>
 
-        <div className="Exercise__panel">
-          {userSolution}
-        </div>
+        <div className="Exercise__panel">{userSolution}</div>
       </div>
 
       <div className="Exercise__column">
-        <div className="Exercise__label">
-          Resultado esperado
-        </div>
+        <div className="Exercise__label">Resultado esperado</div>
 
-        <div className="Exercise__panel">
-          {solution}
-        </div>
+        <div className="Exercise__panel">{solution}</div>
       </div>
     </div>
   </Fragment>

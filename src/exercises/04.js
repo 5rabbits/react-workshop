@@ -62,16 +62,14 @@ export default class TimeEntry extends React.Component {
      *   `setState(currentState => newState, callback?)`
      */
     this.setState(state => ({
-      isTimerActive: !state.isTimerActive
+      isTimerActive: !state.isTimerActive,
     }))
   }
 
   render() {
     return (
       <div className="TimeEntry">
-        <div className="TimeEntry__project">
-          React Workshop
-        </div>
+        <div className="TimeEntry__project">React Workshop</div>
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
@@ -84,10 +82,11 @@ export default class TimeEntry extends React.Component {
             onClick={this.handleToggleTimerClick}
             type="button"
           >
-            {this.state.isTimerActive
-              ? <i className="icon ion-md-pause" />
-              : <i className="icon ion-md-play" />
-            }
+            {this.state.isTimerActive ? (
+              <i className="icon ion-md-pause" />
+            ) : (
+              <i className="icon ion-md-play" />
+            )}
           </button>
         </div>
       </div>
