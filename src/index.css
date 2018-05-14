@@ -92,13 +92,8 @@ body,
   background-color: #EFF2F4;
   border: #ddd solid 1px;
   border-radius: 4px;
-  position: relative;
-}
-
-.Exercise__panel {
-  height: 100%;
-  overflow: auto;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .Exercise__column +
@@ -107,13 +102,20 @@ body,
 }
 
 .Exercise__label {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+  padding: 0.5rem 1rem;
   color: #8493a2;
   font-size: 0.8em;
+  flex-shrink: 0;
+  opacity: 0.75;
+  text-align: right;
 }
 
+.Exercise__panel {
+  height: 100%;
+  overflow: auto;
+  padding: 0 1rem 1rem;
+  flex: 1;
+}
 
 /* Exercise 02 */
 
