@@ -1,6 +1,17 @@
 /**
  * Ejercicio 3 - State, eventos, render condicional
  *
+ * Un componente no puede cambiar directamente las props que recibe,
+ * así que cuando necesitamos tener valores dinámicos que afecten el
+ * render debemos usar state.
+ *
+ * Cada vez que el state de un componente cambie, se invocará un render
+ * automáticamente para reflejar los cambios necesarios.
+ *
+ * Normalmente cambiamos el state en respuesta a algún tipo de evento,
+ * como el click en un botón, un mensaje de websocket, scroll del
+ * documento, etc.
+ *
  * 🏆 Objetivos:
  *   1. Define el estado `isTimerActive` con valor inicial `false`.
  *   2. Al presionar el botón del timer debe invertir el valor de `isTimerActive`.

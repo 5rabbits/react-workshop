@@ -1,6 +1,16 @@
 /**
  * Ejercicio 4 - Lifecycle
  *
+ * Los componentes tienen un ciclo de vida y permiten responder a ellos
+ * declarando ciertas funciones en nuestros componentes.
+ *
+ * Estas funciones nos permiten reaccionar a distintos eventos, para por
+ * ejemplo poder:
+ *   - Operar con el DOM al montar el componente.
+ *   - Ejecutar efectos secundarios, como mutar el state o hacer peticiones
+ *     a servicios externos.
+ *   - Liberar recursos cuando el componente se desmonte.
+ *
  * 🏆 Objetivos:
  *   1. Almacenar el valor de la propiedad "time" en el state, para
  *      poder mutar su valor.
