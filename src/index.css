@@ -210,7 +210,7 @@ a:hover {
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 10rem;
+  height: 4rem;
   width: 10rem;
   padding: 0.5rem;
   color: #fff;
@@ -237,4 +237,15 @@ a:hover {
   color: inherit;
   font-size: 1em;
   cursor: pointer;
+}
+
+/* Exercise 05 */
+
+.TimeEntriesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.TimeEntriesList .TimeEntry + .TimeEntry {
+  margin-top: 0.25rem;
 }

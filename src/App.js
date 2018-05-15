@@ -56,6 +56,23 @@ const exercises = {
       />
     )
   },
+  '05': ({ UserSolution, Solution, exerciseNumber }) => {
+    const time = Math.round(Math.random() * 10000)
+    const timeEntries = [
+      { id: 1, time: 3600, project: 'React Workshop' },
+      { id: 2, time: 18425, project: 'TimeBillingX' },
+      { id: 3, time: 5678, project: 'LemonLabs' },
+      { id: 4, time: 0, project: 'TheTimeBilling' },
+    ]
+
+    return (
+      <ExercisePanel
+        exerciseNumber={exerciseNumber}
+        solution={<Solution timeEntries={timeEntries} />}
+        userSolution={<UserSolution timeEntries={timeEntries} />}
+      />
+    )
+  },
 }
 
 const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
