@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { shallow, mount } from 'enzyme'
 import Solution from '../exercises/04'
 
@@ -41,7 +40,6 @@ describe('Ejercicio 4', () => {
   describe('si el componente recibe un nuevo valor para la propiedad "time"', () => {
     it('respeta el nuevo valor recibido', () => {
       const component = mount(<Solution />)
-      const setState = jest.fn()
 
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
 
