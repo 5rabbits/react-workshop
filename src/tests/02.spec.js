@@ -4,19 +4,19 @@ import { shallow } from 'enzyme'
 import Solution from '../exercises/02'
 
 describe('Ejercicio 2', () => {
-  it('debe validar que la propiedad "time" sea un número', () => {
+  it('valida que la propiedad "time" sea un número', () => {
     expect(Solution.propTypes).toBeDefined()
     expect(Solution.propTypes.time).toBe(PropTypes.number)
   })
 
   describe('si la propiedad "time" no es especificada', () => {
-    it('debe asignarle el valor 0', () => {
+    it('le asigna el valor 0', () => {
       expect(Solution.defaultProps).toBeDefined()
       expect(Solution.defaultProps.time).toBe(0)
     })
   })
 
-  it('debe formatear el tiempo en base a la propiedad "time"', () => {
+  it('formatea el tiempo en base a la propiedad "time"', () => {
     const component = shallow(<Solution time={8765} />)
 
     expect(component.find('.TimeEntry__timer__time')).toHaveText('02:26:05')

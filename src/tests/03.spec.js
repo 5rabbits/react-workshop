@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import Solution from '../exercises/03'
 
 describe('Ejercicio 3', () => {
-  it('debe tener definido su estado inicial', () => {
+  it('define un estado inicial', () => {
     const component = shallow(<Solution />)
 
     expect(component).toHaveState('isTimerActive', false)
@@ -11,7 +11,7 @@ describe('Ejercicio 3', () => {
 
   describe('al presionar el control del timer', () => {
     describe('si el timer está detenido', () => {
-      it('debe iniciarlo', () => {
+      it('lo inicia', () => {
         const component = shallow(<Solution />)
 
         component.setState({ isTimerActive: false })
@@ -22,7 +22,7 @@ describe('Ejercicio 3', () => {
     })
 
     describe('si el timer está activo', () => {
-      it('debe detenerlo', () => {
+      it('lo detiene', () => {
         const component = shallow(<Solution />)
 
         component.setState({ isTimerActive: true })

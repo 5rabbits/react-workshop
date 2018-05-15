@@ -39,7 +39,7 @@ describe('Ejercicio 4', () => {
   })
 
   describe('si el componente recibe un nuevo valor para la propiedad "time"', () => {
-    it('debe respetar el nuevo valor recibido', () => {
+    it('respeta el nuevo valor recibido', () => {
       const component = mount(<Solution />)
       const setState = jest.fn()
 
