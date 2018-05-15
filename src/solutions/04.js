@@ -1,28 +1,15 @@
-/**
- * Ejercicio 4 - Lifecycle
- *
- * 🏆 Objetivos:
- *   1. Almacenar el valor de la propiedad "time" en el state, para
- *      poder mutar su valor.
- *   2. Al iniciar el timer el tiempo debe incrementar segundo a segundo.
- *   3. Al detener el timer el tiempo debe dejar de incrementar.
- *   4. Usa `formatTime` para mostrar el tiempo transcurrido.
- *   5. Si el componente recibe un nuevo valor para la propiedad "time"
- *      debe reemplazar al tiempo transcurrido actual.
- *   6. Si el componente debe detener el timer antes de desmontarse para
- *      evitar fugas de memoria.
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import formatTime from '../helpers/formatTime'
 
 export default class TimeEntry extends React.Component {
   static propTypes = {
+    project: PropTypes.string,
     time: PropTypes.number,
   }
 
   static defaultProps = {
+    project: 'Sin proyecto',
     time: 0,
   }
 
@@ -67,7 +54,7 @@ export default class TimeEntry extends React.Component {
   render() {
     return (
       <div className="TimeEntry">
-        <div className="TimeEntry__project">React Workshop</div>
+        <div className="TimeEntry__project">{this.props.project}</div>
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
