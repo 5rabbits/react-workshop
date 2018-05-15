@@ -11,6 +11,7 @@ yarn install
 ```
 
 ## Workshop
+
 Esta es una aplicación creada con [`create-react-app`](https://github.com/facebook/create-react-app),
 así que en este proyecto no verás mucha configuración de nada :)
 
@@ -42,16 +43,16 @@ Inicialmente todos los tests fallarán, así que **tu objetivo es hacerlos pasar
 
 Para evitar mucho ruido en la consola puedes ejecutar solo los tests del ejercicio en el que estás trabajando. Sigue los siguientes pasos para hacerlo:
 
-1. Presiona la tecla <kbd>w</kbd> para expandir las opciones:
-![Failing tests](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-01.png)
+1.  Presiona la tecla <kbd>w</kbd> para expandir las opciones:
+    ![Failing tests](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-01.png)
 
-1. Presiona la tecla <kbd>p</kbd> para filtrar por nombre de archivo:
-![Options](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-02.png)
+1.  Presiona la tecla <kbd>p</kbd> para filtrar por nombre de archivo:
+    ![Options](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-02.png)
 
-1. Escribe el número del ejercicio que estás resolviendo, usa las flechas para seleccionar el archivo exacto y presiona <kbd>enter</kbd>:
-![Filter by filename](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-03.png)
+1.  Escribe el número del ejercicio que estás resolviendo, usa las flechas para seleccionar el archivo exacto y presiona <kbd>enter</kbd>:
+    ![Filter by filename](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-03.png)
 
-1. Ahora se ejecutarán solo los tests del archivo seleccionado:
-![Single test file run](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-04.png)
+1.  Ahora se ejecutarán solo los tests del archivo seleccionado:
+    ![Single test file run](https://raw.githubusercontent.com/rdiazv/react-workshop/readme-assets/assets/test-04.png)
 
-1. Repite los mismos pasos para cambiar a otro ejercicio.
+1.  Repite los mismos pasos para cambiar a otro ejercicio.

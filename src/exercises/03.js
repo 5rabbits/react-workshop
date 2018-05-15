@@ -50,7 +50,9 @@ export default class TimeEntry extends React.Component {
         <div className="TimeEntry__project">React Workshop</div>
 
         <div className="TimeEntry__timer">
-          <div className="TimeEntry__timer__time">{formatTime(this.props.time)}</div>
+          <div className="TimeEntry__timer__time">
+            {formatTime(this.props.time)}
+          </div>
 
           <button
             className="TimeEntry__timer__control"

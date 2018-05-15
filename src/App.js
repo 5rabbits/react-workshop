@@ -4,7 +4,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 const loadMarkdown = require.context(
   '!html-loader!markdown-loader!./',
   false,
-  /\.md$/,
+  /\.md$/
 )
 
 const readme = loadMarkdown('./README.md')
