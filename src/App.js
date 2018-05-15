@@ -1,6 +1,14 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 
+const loadMarkdown = require.context(
+  '!html-loader!markdown-loader!./',
+  false,
+  /\.md$/,
+)
+
+const readme = loadMarkdown('./README.md')
+
 const defaultExerciseRenderer = ({
   UserSolution,
   Solution,
@@ -79,9 +87,12 @@ const App = () => (
 )
 
 const Home = () => (
-  <Fragment>
-    <h1>React Workshop</h1>
-  </Fragment>
+  <div
+    className="Home"
+    dangerouslySetInnerHTML={{
+      __html: readme,
+    }}
+  />
 )
 
 const Exercise = ({

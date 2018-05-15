@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 @import '~ionicons/dist/css/ionicons.css';
 
 * {
@@ -20,6 +21,15 @@ body,
 #root,
 .App {
   height: 100%;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .App {
@@ -80,6 +90,84 @@ body,
 .App__content h1 {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+.Home {
+  max-width: 888px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+.Home h1,
+.Home h2,
+.Home h3,
+.Home h4,
+.Home h5,
+.Home h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.Home h1 {
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid #eaecef
+}
+
+.Home h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.Home p {
+  margin-bottom: 16px;
+  line-height: 1.5em;
+}
+
+.Home code,
+.Home kbd {
+  font-family: 'Inconsolata', monospace;
+}
+
+.Home code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: rgba(27,31,35,0.05);
+  border-radius: 4px;
+}
+
+.Home pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 4px;
+}
+
+.Home pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+.Home kbd {
+  display: inline-block;
+  padding: 4px 6px;
+  line-height: 0.75em;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
+
+.Home img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .Exercise__row {
