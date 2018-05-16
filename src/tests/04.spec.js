@@ -1,3 +1,52 @@
+/**
+ * 🚨 ATENCIÓN: Los tests pueden tener spoilers de la solución, te
+ * recomiendo verlos después de que hayas resuelto el ejercicio.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import TimeEntry from '../exercises/04'
