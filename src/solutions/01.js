@@ -1,6 +1,6 @@
 /**
  * 🚨 ATENCIÓN: Está es la solución a un problema, no la veas a menos que
- * hayas podido resolverlo por ti mismo.
+ * hayas podido resolverlo por ti mism@.
  *
  * Si necesitas orientación no tengas miedo de preguntar, o si lo prefieres
  * puedes trabajar en conjunto con un compañero para que se apoyen mutuamente,
