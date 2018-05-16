@@ -28,6 +28,8 @@
  *      Esta función debe ser invocada cada vez que se haga click en el timer de un trabajo,
  *      pasando el id del trabajo como argumento.
  *   6. Sube el state de `TimeEntry` al componente `TimeEntriesList`.
+ *
+ * 🦄 https://reactjs.org/docs/lifting-state-up.html
  */
 
 import React from 'react'
@@ -36,23 +38,73 @@ import formatTime from '../helpers/formatTime'
 
 export class TimeEntry extends React.Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
-    isTimerActive: PropTypes.bool,
-    onTimerToggle: PropTypes.func.isRequired,
+    // ✏️ Agrega las nuevas propiedades del componente
     project: PropTypes.string,
     time: PropTypes.number,
   }
 
   static defaultProps = {
-    isTimerActive: false,
+    // ✏️ Define los nuevos valores por defecto que sean necesarios
     project: 'Sin proyecto',
     time: 0,
   }
 
-  handleToggleTimerClick = () => {
-    this.props.onTimerToggle(this.props.id)
+  // ✏️ Sube el estado al componente `TimeEntriesList`
+  state = {
+    isTimerActive: false,
+    time: this.props.time,
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.time !== prevState.time) {
+      return {
+        time: nextProps.time,
+      }
+    }
+
+    return null
+  }
+
+  componentWillUnmount() {
+    this.stopTimerInterval()
+  }
+
+  handleToggleTimerClick = () => {
+    /**
+     * ✏️ El componente ahora no tendrá estado, así que cuando se
+     * necesite cambiar el timer debes notificar al componente padre
+     * mediante un callback pasado por props.
+     */
+    this.setState(
+      state => ({
+        isTimerActive: !state.isTimerActive,
+      }),
+      () => {
+        this.stopTimerInterval()
+
+        if (this.state.isTimerActive) {
+          this.startTimerInterval()
+        }
+      }
+    )
+  }
+
+  startTimerInterval() {
+    this.interval = setInterval(() => {
+      this.setState(state => ({
+        time: state.time + 1,
+      }))
+    }, 1000)
+  }
+
+  stopTimerInterval() {
+    clearInterval(this.interval)
+  }
+
+  /**
+   * ✏️ Este componente ahora no tiene estado, así que solo puedes
+   * utilizar props.
+   */
   render() {
     return (
       <div className="TimeEntry">
@@ -60,7 +112,7 @@ export class TimeEntry extends React.Component {
 
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
-            {formatTime(this.props.time)}
+            {formatTime(this.state.time)}
           </div>
 
           <button
@@ -68,7 +120,7 @@ export class TimeEntry extends React.Component {
             onClick={this.handleToggleTimerClick}
             type="button"
           >
-            {this.props.isTimerActive ? (
+            {this.state.isTimerActive ? (
               <i className="icon ion-md-pause" />
             ) : (
               <i className="icon ion-md-play" />
@@ -91,54 +143,20 @@ export default class TimeEntriesList extends React.Component {
     ).isRequired,
   }
 
-  state = {
-    activeTimeEntryId: null,
-    timeEntries: this.props.timeEntries,
-  }
+  /**
+   * ✏️ Define e implementa los cambios de estados que subieron desde
+   * el componente `TimeEntry`.
+   */
 
-  handleTimerToggle = timeEntryId => {
-    this.setState(
-      state => ({
-        activeTimeEntryId:
-          state.activeTimeEntryId === timeEntryId ? null : timeEntryId,
-      }),
-      () => {
-        clearInterval(this.interval)
-
-        if (this.state.activeTimeEntryId) {
-          const index = this.state.timeEntries.findIndex(
-            timeEntry => timeEntry.id === this.state.activeTimeEntryId
-          )
-
-          this.interval = setInterval(() => {
-            this.setState(state => ({
-              timeEntries: [
-                ...state.timeEntries.slice(0, index),
-                {
-                  ...state.timeEntries[index],
-                  time: state.timeEntries[index].time + 1,
-                },
-                ...state.timeEntries.slice(index + 1),
-              ],
-            }))
-          }, 1000)
-        }
-      }
-    )
-  }
-
+  /**
+   * ✏️ Debes ajustar el render para utilizar el state del componente
+   * y pasar las propiedades que necesites a los componentes `TimEntry`.
+   */
   render() {
     return (
       <div className="TimeEntriesList">
-        {this.state.timeEntries.map(entry => (
-          <TimeEntry
-            key={entry.id}
-            id={entry.id}
-            isTimerActive={entry.id === this.state.activeTimeEntryId}
-            onTimerToggle={this.handleTimerToggle}
-            project={entry.project}
-            time={entry.time}
-          />
+        {this.props.timeEntries.map(entry => (
+          <TimeEntry key={entry.id} project={entry.project} time={entry.time} />
         ))}
       </div>
     )
