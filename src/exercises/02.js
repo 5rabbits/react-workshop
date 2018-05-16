@@ -32,31 +32,29 @@ import formatTime from '../helpers/formatTime'
  * 🦄 https://reactjs.org/docs/typechecking-with-proptypes.html
  */
 
-export default class TimeEntry extends React.Component {
-  /**
-   * ✏️ Declara las propiedades que este componente acepta.
-   */
+const TimeEntry = props => (
+  <div className="TimeEntry">
+    <div className="TimeEntry__project">
+      {/* ✏️ Utiliza la propiedad `project` */}
+      Sin proyecto
+    </div>
 
-  /**
-   * ✏️ Declara los valores por defecto para las propiedades
-   * opcionales que lo necesiten.
-   */
-
-  render() {
-    return (
-      <div className="TimeEntry">
-        <div className="TimeEntry__project">
-          {/* ✏️ Utiliza la propiedad `project` */}
-          Sin proyecto
-        </div>
-
-        <div className="TimeEntry__timer">
-          <div className="TimeEntry__timer__time">
-            {/* ✏️ Utiliza la propiedad `time` */}
-            {formatTime(0)}
-          </div>
-        </div>
+    <div className="TimeEntry__timer">
+      <div className="TimeEntry__timer__time">
+        {/* ✏️ Utiliza la propiedad `time` */}
+        {formatTime(0)}
       </div>
-    )
-  }
-}
+    </div>
+  </div>
+)
+
+/**
+ * ✏️ Declara las propiedades que este componente acepta.
+ */
+
+/**
+ * ✏️ Declara los valores por defecto para las propiedades
+ * opcionales que lo necesiten.
+ */
+
+export default TimeEntry
