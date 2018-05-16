@@ -7,7 +7,12 @@ Enzyme.configure({ adapter: new Adapter() })
 
 jest.useFakeTimers()
 
-beforeEach(() => jest.clearAllTimers())
+beforeEach(() => {
+  jest.clearAllTimers()
+  setTimeout.mockClear()
+  setInterval.mockClear()
+  setImmediate.mockClear()
+})
 
 /**
  * Fail after the first test in a single test suite fails. This is NOT the same as jest's
