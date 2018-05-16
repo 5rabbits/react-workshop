@@ -29,7 +29,7 @@ export class TimeEntry extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    this.stopTimerInterval()
   }
 
   handleToggleTimerClick = () => {
@@ -38,17 +38,25 @@ export class TimeEntry extends React.Component {
         isTimerActive: !state.isTimerActive,
       }),
       () => {
-        clearInterval(this.interval)
+        this.stopTimerInterval()
 
         if (this.state.isTimerActive) {
-          this.interval = setInterval(() => {
-            this.setState(state => ({
-              time: state.time + 1,
-            }))
-          }, 1000)
+          this.startTimerInterval()
         }
       }
     )
+  }
+
+  startTimerInterval() {
+    this.interval = setInterval(() => {
+      this.setState(state => ({
+        time: state.time + 1,
+      }))
+    }, 1000)
+  }
+
+  stopTimerInterval() {
+    clearInterval(this.interval)
   }
 
   render() {

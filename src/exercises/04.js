@@ -68,10 +68,6 @@ export default class TimeEntry extends React.Component {
      *
      * 🦄 Esto te ayudará con el incremento segundo a segundo:
      * https://www.w3schools.com/jsref/met_win_setinterval.asp
-     *
-     * Y recuerda que `setState` soporta las siguientes firmas:
-     *   `setState(newState, callback?)`
-     *   `setState(currentState => newState, callback?)`
      */
     this.setState(state => ({
       isTimerActive: !state.isTimerActive,
