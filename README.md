@@ -1,6 +1,6 @@
 # React Workshop
 
-Este workshop te ayudará a aprender conceptos, técnicas y patrones para crear componentes en React.
+Este workshop te ayudará a aprender y practicar conceptos, técnicas y patrones para crear componentes en React.
 
 ## Setup
 
