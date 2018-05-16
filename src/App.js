@@ -9,25 +9,21 @@ const loadMarkdown = require.context(
 
 const readme = loadMarkdown('./README.md')
 
-const defaultExerciseRenderer = ({
-  UserSolution,
-  Solution,
-  exerciseNumber,
-}) => (
-  <ExercisePanel
-    exerciseNumber={exerciseNumber}
-    solution={<Solution />}
-    userSolution={<UserSolution />}
-  />
-)
-
 const exercises = {
-  '01': defaultExerciseRenderer,
+  '01': ({ UserSolution, Solution, exerciseNumber }) => (
+    <ExercisePanel
+      description="El componente debe mostrar el texto correcto."
+      exerciseNumber={exerciseNumber}
+      solution={<Solution />}
+      userSolution={<UserSolution />}
+    />
+  ),
   '02': ({ UserSolution, Solution, exerciseNumber }) => {
     const time = Math.round(Math.random() * 10000)
 
     return (
       <ExercisePanel
+        description="El trabajo debe mostrar el tiempo correcto."
         exerciseNumber={exerciseNumber}
         solution={<Solution time={time} />}
         userSolution={<UserSolution time={time} />}
@@ -39,6 +35,7 @@ const exercises = {
 
     return (
       <ExercisePanel
+        description="Agregar un botón para el timer que cambie de estado al hacer click."
         exerciseNumber={exerciseNumber}
         solution={<Solution time={time} />}
         userSolution={<UserSolution time={time} />}
@@ -50,6 +47,7 @@ const exercises = {
 
     return (
       <ExercisePanel
+        description="El tiempo debe incrementar mientras el timer esté activo."
         exerciseNumber={exerciseNumber}
         solution={<Solution time={time} />}
         userSolution={<UserSolution time={time} />}
@@ -66,6 +64,7 @@ const exercises = {
 
     return (
       <ExercisePanel
+        description="Mostrar una lista de trabajos."
         exerciseNumber={exerciseNumber}
         solution={<Solution timeEntries={timeEntries} />}
         userSolution={<UserSolution timeEntries={timeEntries} />}
@@ -82,6 +81,7 @@ const exercises = {
 
     return (
       <ExercisePanel
+        description="Solo un trabajo a la vez puede tener su timer activo."
         exerciseNumber={exerciseNumber}
         solution={<Solution timeEntries={timeEntries} />}
         userSolution={<UserSolution timeEntries={timeEntries} />}
@@ -143,9 +143,13 @@ const Exercise = ({
   })
 }
 
-const ExercisePanel = ({ exerciseNumber, userSolution, solution }) => (
+const ExercisePanel = ({ description, exerciseNumber, userSolution, solution }) => (
   <Fragment>
     <h1>{getExerciseName(exerciseNumber)}</h1>
+
+    {description &&
+      <p>{description}</p>
+    }
 
     <div className="Exercise__row">
       <div className="Exercise__column">
