@@ -1,17 +1,17 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import Solution from '../exercises/04'
+import TimeEntry from '../exercises/04'
 
 describe('Ejercicio 4', () => {
   it('define el state inicial', () => {
-    const component = shallow(<Solution time={1234} />)
+    const component = shallow(<TimeEntry time={1234} />)
 
     expect(component).toHaveState('time', 1234)
   })
 
   describe('al iniciar el timer', () => {
     it('el tiempo debe incrementar cada segundo', () => {
-      const component = shallow(<Solution />)
+      const component = shallow(<TimeEntry />)
 
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
       component.find('.TimeEntry__timer__control').simulate('click')
@@ -33,7 +33,7 @@ describe('Ejercicio 4', () => {
 
   describe('al detener el timer', () => {
     it('el tiempo debe dejar de incrementar', () => {
-      const component = shallow(<Solution />)
+      const component = shallow(<TimeEntry />)
 
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
       component.find('.TimeEntry__timer__control').simulate('click')
@@ -54,7 +54,7 @@ describe('Ejercicio 4', () => {
 
   describe('si el componente recibe un nuevo valor para la propiedad "time"', () => {
     it('respeta el nuevo valor recibido', () => {
-      const component = mount(<Solution />)
+      const component = mount(<TimeEntry />)
 
       component.setProps({ time: 60 })
       expect(component).toHaveState('time', 60)
@@ -63,7 +63,7 @@ describe('Ejercicio 4', () => {
 
   describe('si el componente recibe el mismo valor para la propiedad "time"', () => {
     it('no actualiza el state innecesariamente', () => {
-      const component = mount(<Solution time={60} />)
+      const component = mount(<TimeEntry time={60} />)
       const setState = jest.fn()
 
       component.instance().setState = setState
@@ -75,7 +75,7 @@ describe('Ejercicio 4', () => {
 
   describe('al desmontar el componente', () => {
     it('el tiempo debe dejar de incrementar', () => {
-      const component = mount(<Solution />)
+      const component = mount(<TimeEntry />)
       const setState = jest.fn()
 
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')

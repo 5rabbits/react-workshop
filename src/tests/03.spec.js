@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Solution from '../exercises/03'
+import TimeEntry from '../exercises/03'
 
 describe('Ejercicio 3', () => {
   it('define un estado inicial', () => {
-    const component = shallow(<Solution />)
+    const component = shallow(<TimeEntry />)
 
     expect(component).toHaveState('isTimerActive', false)
   })
@@ -12,7 +12,7 @@ describe('Ejercicio 3', () => {
   describe('al presionar el control del timer', () => {
     describe('si el timer está detenido', () => {
       it('lo inicia', () => {
-        const component = shallow(<Solution />)
+        const component = shallow(<TimeEntry />)
 
         component.setState({ isTimerActive: false })
         component.find('.TimeEntry__timer__control').simulate('click')
@@ -23,7 +23,7 @@ describe('Ejercicio 3', () => {
 
     describe('si el timer está activo', () => {
       it('lo detiene', () => {
-        const component = shallow(<Solution />)
+        const component = shallow(<TimeEntry />)
 
         component.setState({ isTimerActive: true })
         component.find('.TimeEntry__timer__control').simulate('click')
@@ -35,7 +35,7 @@ describe('Ejercicio 3', () => {
 
   describe('si el timer está detenido', () => {
     it('debe mostrar el icono "play"', () => {
-      const component = shallow(<Solution />)
+      const component = shallow(<TimeEntry />)
 
       component.setState({ isTimerActive: false })
 
@@ -47,7 +47,7 @@ describe('Ejercicio 3', () => {
 
   describe('si el timer está activo', () => {
     it('debe mostrar el icono "pause"', () => {
-      const component = shallow(<Solution />)
+      const component = shallow(<TimeEntry />)
 
       component.setState({ isTimerActive: true })
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { shallow, mount } from 'enzyme'
-import Solution, { TimeEntry } from '../exercises/06'
+import TimeEntriesList, { TimeEntry } from '../exercises/06'
 
 describe('Ejercicio 6', () => {
   const timeEntries = [
@@ -27,13 +27,13 @@ describe('Ejercicio 6', () => {
 
   describe('TimeEntriesList', () => {
     it('define el state `timeEntries` a partir de `props.timeEntries`', () => {
-      const component = shallow(<Solution timeEntries={timeEntries} />)
+      const component = shallow(<TimeEntriesList timeEntries={timeEntries} />)
 
       expect(component).toHaveState('timeEntries', timeEntries)
     })
 
     it('define el state `activeTimeEntryId` con valor `null`', () => {
-      const component = shallow(<Solution timeEntries={timeEntries} />)
+      const component = shallow(<TimeEntriesList timeEntries={timeEntries} />)
 
       expect(component).toHaveState('activeTimeEntryId', null)
     })
@@ -76,7 +76,7 @@ describe('Ejercicio 6', () => {
   describe('TimeEntriesList', () => {
     describe('al iniciar un timer', () => {
       it('guarda el id del trabajo activo en `state.activeTimeEntryId`', () => {
-        const component = mount(<Solution timeEntries={timeEntries} />)
+        const component = mount(<TimeEntriesList timeEntries={timeEntries} />)
         const timeEntriesComponents = component.find(TimeEntry)
 
         timeEntries.forEach((timeEntry, index) => {
@@ -90,7 +90,7 @@ describe('Ejercicio 6', () => {
       })
 
       it('el tiempo del trabajo activo de incrementar cada segundo', () => {
-        const component = mount(<Solution timeEntries={timeEntries} />)
+        const component = mount(<TimeEntriesList timeEntries={timeEntries} />)
 
         component
           .find(TimeEntry)
@@ -125,7 +125,7 @@ describe('Ejercicio 6', () => {
       })
 
       it('solo el trabajo activo debe mostrar el icono "pause"', () => {
-        const component = mount(<Solution timeEntries={timeEntries} />)
+        const component = mount(<TimeEntriesList timeEntries={timeEntries} />)
 
         expect(component.find(TimeEntry).find('.ion-md-play').length).toBe(
           timeEntries.length
@@ -152,7 +152,7 @@ describe('Ejercicio 6', () => {
 
     describe('al detener el timer', () => {
       it('devuelve `state.activeTimeEntryId` a null', () => {
-        const component = mount(<Solution timeEntries={timeEntries} />)
+        const component = mount(<TimeEntriesList timeEntries={timeEntries} />)
         const timeEntriesComponents = component.find(TimeEntry)
 
         timeEntries.forEach((timeEntry, index) => {

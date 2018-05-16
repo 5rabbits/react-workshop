@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Solution, { TimeEntry } from '../exercises/05'
+import TimeEntriesList, { TimeEntry } from '../exercises/05'
 
 describe('Ejercicio 5', () => {
   const timeEntries = [
@@ -11,20 +11,20 @@ describe('Ejercicio 5', () => {
   ]
 
   it('despliega un arreglo de trabajos usando el componente `TimeEntry`', () => {
-    const component = shallow(<Solution timeEntries={timeEntries} />)
+    const component = shallow(<TimeEntriesList timeEntries={timeEntries} />)
 
     expect(component.find(TimeEntry).length).toBe(4)
   })
 
   it('asigna el atributo key de manera única a cada trabajo', () => {
-    const component = shallow(<Solution timeEntries={timeEntries} />)
+    const component = shallow(<TimeEntriesList timeEntries={timeEntries} />)
     const keys = component.find(TimeEntry).map(timeEntry => timeEntry.key())
 
     expect(new Set(keys).size).toEqual(keys.length)
   })
 
   it('pasa los datos correctos a cada trabajo', () => {
-    const component = shallow(<Solution timeEntries={timeEntries} />)
+    const component = shallow(<TimeEntriesList timeEntries={timeEntries} />)
 
     timeEntries.forEach((timeEntry, index) => {
       const timeEntryComponent = component.find(TimeEntry).at(index)
