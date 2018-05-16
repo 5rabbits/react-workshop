@@ -97,32 +97,34 @@ export default class TimeEntriesList extends React.Component {
   }
 
   handleTimerToggle = timeEntryId => {
-    this.setState(state => ({
-      activeTimeEntryId: state.activeTimeEntryId === timeEntryId
-        ? null
-        : timeEntryId
-    }), () => {
-      clearInterval(this.interval)
+    this.setState(
+      state => ({
+        activeTimeEntryId:
+          state.activeTimeEntryId === timeEntryId ? null : timeEntryId,
+      }),
+      () => {
+        clearInterval(this.interval)
 
-      if (this.state.activeTimeEntryId) {
-        const index = this.state.timeEntries.findIndex(timeEntry =>
-          timeEntry.id === this.state.activeTimeEntryId
-        )
+        if (this.state.activeTimeEntryId) {
+          const index = this.state.timeEntries.findIndex(
+            timeEntry => timeEntry.id === this.state.activeTimeEntryId
+          )
 
-        this.interval = setInterval(() => {
-          this.setState(state => ({
-            timeEntries: [
-              ...state.timeEntries.slice(0, index),
-              {
-                ...state.timeEntries[index],
-                time: state.timeEntries[index].time + 1,
-              },
-              ...state.timeEntries.slice(index + 1),
-            ],
-          }))
-        }, 1000)
+          this.interval = setInterval(() => {
+            this.setState(state => ({
+              timeEntries: [
+                ...state.timeEntries.slice(0, index),
+                {
+                  ...state.timeEntries[index],
+                  time: state.timeEntries[index].time + 1,
+                },
+                ...state.timeEntries.slice(index + 1),
+              ],
+            }))
+          }, 1000)
+        }
       }
-    })
+    )
   }
 
   render() {

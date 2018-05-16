@@ -92,7 +92,9 @@ describe('Ejercicio 6', () => {
       it('el tiempo del trabajo activo de incrementar cada segundo', () => {
         const component = mount(<Solution timeEntries={timeEntries} />)
 
-        component.find(TimeEntry).at(1)
+        component
+          .find(TimeEntry)
+          .at(1)
           .find('.TimeEntry__timer__control')
           .simulate('click')
 
@@ -125,20 +127,25 @@ describe('Ejercicio 6', () => {
       it('solo el trabajo activo debe mostrar el icono "pause"', () => {
         const component = mount(<Solution timeEntries={timeEntries} />)
 
-        expect(
-          component.find(TimeEntry).find('.ion-md-play').length
-        ).toBe(timeEntries.length)
+        expect(component.find(TimeEntry).find('.ion-md-play').length).toBe(
+          timeEntries.length
+        )
 
-        component.find(TimeEntry).at(1)
+        component
+          .find(TimeEntry)
+          .at(1)
           .find('.TimeEntry__timer__control')
           .simulate('click')
 
-        expect(
-          component.find(TimeEntry).find('.ion-md-play').length
-        ).toBe(timeEntries.length - 1)
+        expect(component.find(TimeEntry).find('.ion-md-play').length).toBe(
+          timeEntries.length - 1
+        )
 
         expect(
-          component.find(TimeEntry).at(1).find('.ion-md-pause').length
+          component
+            .find(TimeEntry)
+            .at(1)
+            .find('.ion-md-pause').length
         ).toBe(1)
       })
     })
