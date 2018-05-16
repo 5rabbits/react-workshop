@@ -3,6 +3,12 @@ import { shallow, mount } from 'enzyme'
 import Solution from '../exercises/04'
 
 describe('Ejercicio 4', () => {
+  it('define el state inicial', () => {
+    const component = shallow(<Solution time={1234} />)
+
+    expect(component).toHaveState('time', 1234)
+  })
+
   describe('al iniciar el timer', () => {
     it('el tiempo debe incrementar cada segundo', () => {
       const component = shallow(<Solution />)
@@ -15,10 +21,12 @@ describe('Ejercicio 4', () => {
 
       jest.runOnlyPendingTimers()
       component.update()
+      expect(component).toHaveState('time', 1)
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:01')
 
       jest.runOnlyPendingTimers()
       component.update()
+      expect(component).toHaveState('time', 2)
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:02')
     })
   })
@@ -29,11 +37,18 @@ describe('Ejercicio 4', () => {
 
       expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
       component.find('.TimeEntry__timer__control').simulate('click')
+
+      jest.runOnlyPendingTimers()
+      component.update()
+      expect(component).toHaveState('time', 1)
+      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:01')
+
       component.find('.TimeEntry__timer__control').simulate('click')
 
       jest.runOnlyPendingTimers()
       component.update()
-      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
+      expect(component).toHaveState('time', 1)
+      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:01')
     })
   })
 
@@ -41,11 +56,20 @@ describe('Ejercicio 4', () => {
     it('respeta el nuevo valor recibido', () => {
       const component = mount(<Solution />)
 
-      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:00:00')
+      component.setProps({ time: 60 })
+      expect(component).toHaveState('time', 60)
+    })
+  })
 
+  describe('si el componente recibe el mismo valor para la propiedad "time"', () => {
+    it('no actualiza el state innecesariamente', () => {
+      const component = mount(<Solution time={60} />)
+      const setState = jest.fn()
+
+      component.instance().setState = setState
       component.setProps({ time: 60 })
 
-      expect(component.find('.TimeEntry__timer__time')).toHaveText('00:01:00')
+      expect(setState).not.toHaveBeenCalled()
     })
   })
 
