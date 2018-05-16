@@ -85,11 +85,11 @@ export default class TimeEntriesList extends React.Component {
   }
 
   startTimerInterval() {
-    const index = this.state.timeEntries.findIndex(
-      timeEntry => timeEntry.id === this.state.activeTimeEntryId
-    )
-
     this.interval = setInterval(() => {
+      const index = this.state.timeEntries.findIndex(
+        timeEntry => timeEntry.id === this.state.activeTimeEntryId
+      )
+
       this.setState(state => ({
         timeEntries: [
           ...state.timeEntries.slice(0, index),
