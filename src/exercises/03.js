@@ -34,45 +34,50 @@ import formatTime from '../helpers/formatTime'
  * ✏️ Define un handler para el click del botón.
  * 🦄 https://reactjs.org/docs/handling-events.html
  */
-const TimeEntry = props => (
-  <div className="TimeEntry">
-    <div className="TimeEntry__project">{props.project}</div>
+class TimeEntry extends React.Component {
+  static propTypes = {
+    project: PropTypes.string,
+    time: PropTypes.number,
+  }
 
-    <div className="TimeEntry__timer">
-      <div className="TimeEntry__timer__time">{formatTime(props.time)}</div>
+  static defaultProps = {
+    project: 'Sin proyecto',
+    time: 0,
+  }
 
-      <button
-        className="TimeEntry__timer__control"
-        type="button"
-        /**
-         * ✏️ Reacciona al click para ejecutar el handler que definiste
-         * anteriormente.
-         *
-         * 🦄 https://reactjs.org/docs/events.html#mouse-events
-         */
-      >
-        {/**
-         * ✏️ Dependiendo del estado actual, debes mostrar uno de los
-         * siguientes iconos.
-         *
-         * 🦄 https://reactjs.org/docs/conditional-rendering.html
-         */}
+  constructor(props) {
+    super(props)
+    this.state = {
+      isTimerActive: false
+    }
+  }
 
-        {/* <i className="icon ion-md-play" /> */}
-        {/* <i className="icon ion-md-pause" /> */}
-      </button>
-    </div>
-  </div>
-)
+  handleClick = () => {
+    this.setState({
+      isTimerActive: !this.state.isTimerActive
+    });
+  }
 
-TimeEntry.propTypes = {
-  project: PropTypes.string,
-  time: PropTypes.number,
-}
+  render() {
+    return (
+      <div className="TimeEntry">
+        <div className="TimeEntry__project">{this.props.project}</div>
 
-TimeEntry.defaultProps = {
-  project: 'Sin proyecto',
-  time: 0,
+        <div className="TimeEntry__timer">
+          <div className="TimeEntry__timer__time">{formatTime(this.props.time)}</div>
+
+          <button
+            className="TimeEntry__timer__control"
+            type="button"
+            onClick={this.handleClick}
+          >
+            { !this.state.isTimerActive && <i className="icon ion-md-play" /> }
+            { this.state.isTimerActive && <i className="icon ion-md-pause" /> }
+          </button>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default TimeEntry

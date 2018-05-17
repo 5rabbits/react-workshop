@@ -13,7 +13,7 @@
 import React from 'react'
 
 const HelloWorld = () => (
-  <div>React Workshop</div> // ✏️ Debes cambiar este texto :)
+  <div>Hola mundo</div> // ✏️ Debes cambiar este texto :)
 )
 
 export default HelloWorld

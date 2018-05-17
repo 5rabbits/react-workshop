@@ -24,6 +24,7 @@
 
 import React from 'react'
 import formatTime from '../helpers/formatTime'
+import PropTypes from 'prop-types';
 
 /**
  * ✏️ Importa la biblioteca `prop-types` (ya está instalada) para acceder a
@@ -35,14 +36,12 @@ import formatTime from '../helpers/formatTime'
 const TimeEntry = props => (
   <div className="TimeEntry">
     <div className="TimeEntry__project">
-      {/* ✏️ Utiliza la propiedad `project` */}
-      Sin proyecto
+      {props.project}
     </div>
 
     <div className="TimeEntry__timer">
       <div className="TimeEntry__timer__time">
-        {/* ✏️ Utiliza la propiedad `time` */}
-        {formatTime(0)}
+        {formatTime(props.time)}
       </div>
     </div>
   </div>
@@ -51,10 +50,18 @@ const TimeEntry = props => (
 /**
  * ✏️ Declara las propiedades que este componente acepta.
  */
+TimeEntry.propTypes = {
+  time: PropTypes.number,
+  project: PropTypes.string
+}
 
 /**
  * ✏️ Declara los valores por defecto para las propiedades
  * opcionales que lo necesiten.
  */
+TimeEntry.defaultProps = {
+  time: 0,
+  project: 'Sin proyecto'
+};
 
 export default TimeEntry

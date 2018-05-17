@@ -111,14 +111,13 @@ export default class TimeEntriesList extends React.Component {
   }
 
   render() {
+    const listTimeEntries = this.props.timeEntries.map((timeEntry) =>
+      <TimeEntry key={timeEntry.id}
+        project={timeEntry.project} time={timeEntry.time} />
+    )
     return (
       <div className="TimeEntriesList">
-        {/**
-         * ✏️ Despliega cada trabajo recibido en `props.timeEntries`
-         * usando el componente `TimeEntry`.
-         *
-         * 🦄 https://reactjs.org/docs/lists-and-keys.html
-         */}
+        {listTimeEntries}
       </div>
     )
   }

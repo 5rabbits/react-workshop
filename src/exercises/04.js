@@ -40,12 +40,10 @@ export default class TimeEntry extends React.Component {
 
   state = {
     isTimerActive: false,
-
-    /**
-     * ✏️ Usa la propiedad `time` como el valor inicial para el
-     * tiempo transcurrido.
-     */
+    time: this.props.time
   }
+
+  timer = null
 
   /**
    * ✏️ Actualiza el state cuando recibas un nuevo valor para la
@@ -53,10 +51,17 @@ export default class TimeEntry extends React.Component {
    *
    * 🦄 https://reactjs.org/docs/react-component.html#the-component-lifecycle
    */
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      time: nextProps.time
+    }
+  }
 
-  /**
-   * ✏️ Asegúrate de detener el timer antes de desmontar el componente.
-   */
+  componentWillUnmount() {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
+  }
 
   handleToggleTimerClick = () => {
     /**
@@ -69,9 +74,23 @@ export default class TimeEntry extends React.Component {
      * 🦄 Esto te ayudará con el incremento segundo a segundo:
      * https://www.w3schools.com/jsref/met_win_setinterval.asp
      */
-    this.setState(state => ({
-      isTimerActive: !state.isTimerActive,
-    }))
+    this.setState({
+      isTimerActive: !this.state.isTimerActive
+    }, this.updateTimerStatus)
+  }
+
+  updateTimerStatus = () => {
+    if (this.state.isTimerActive) {
+      this.timer = setInterval(() => {
+        const time = this.state.time
+
+        this.setState({
+          time: time + 1
+        })
+      }, 1000);
+    } else {
+      clearInterval(this.timer)
+    }
   }
 
   render() {
@@ -82,7 +101,7 @@ export default class TimeEntry extends React.Component {
         <div className="TimeEntry__timer">
           <div className="TimeEntry__timer__time">
             {/* ✏️ Despliega el tiempo transcurrido */}
-            {formatTime(this.props.time)}
+            {formatTime(this.state.time)}
           </div>
 
           <button
