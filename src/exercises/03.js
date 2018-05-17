@@ -39,9 +39,7 @@ const TimeEntry = props => (
     <div className="TimeEntry__project">{props.project}</div>
 
     <div className="TimeEntry__timer">
-      <div className="TimeEntry__timer__time">
-        {formatTime(props.time)}
-      </div>
+      <div className="TimeEntry__timer__time">{formatTime(props.time)}</div>
 
       <button
         className="TimeEntry__timer__control"
@@ -54,11 +52,11 @@ const TimeEntry = props => (
          */
       >
         {/**
-          * ✏️ Dependiendo del estado actual, debes mostrar uno de los
-          * siguientes iconos.
-          *
-          * 🦄 https://reactjs.org/docs/conditional-rendering.html
-          */}
+         * ✏️ Dependiendo del estado actual, debes mostrar uno de los
+         * siguientes iconos.
+         *
+         * 🦄 https://reactjs.org/docs/conditional-rendering.html
+         */}
 
         {/* <i className="icon ion-md-play" /> */}
         {/* <i className="icon ion-md-pause" /> */}

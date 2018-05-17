@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
+import { Tooltip } from 'react-tippy'
+import 'react-tippy/dist/tippy.css'
 
 const loadMarkdown = require.context(
   '!html-loader!markdown-loader!./',
@@ -93,7 +95,7 @@ const exercises = {
 
 const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 
-const App = inject('store')(observer(({ store }) => (
+const App = () => (
   <BrowserRouter>
     <div className="App">
       <div className="App__wrapper">
@@ -103,23 +105,16 @@ const App = inject('store')(observer(({ store }) => (
               Inicio
             </NavLink>
           </li>
-          {Object.keys(exercises).map(exercise => {
-            const exerciseState = store.getExerciseState(exercise)
-
-            return (
-              <li key={exercise}>
-                <NavLink to={`/${exercise}`}>
-                  {getExerciseName(exercise)}
-                  {' '}
-                  <span className="App__nav__icon">
-                    {exerciseState.state === 'passing' &&
-                      <i className="icon ion-md-checkmark" />
-                    }
-                  </span>
-                </NavLink>
-              </li>
-            )
-          })}
+          {Object.keys(exercises).map(exercise => (
+            <li key={exercise}>
+              <NavLink to={`/${exercise}`}>
+                {getExerciseName(exercise)}{' '}
+                <span className="App__nav__icon">
+                  <ExerciseCheck exercise={exercise} />
+                </span>
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         <div className="App__content">
@@ -129,7 +124,7 @@ const App = inject('store')(observer(({ store }) => (
       </div>
     </div>
   </BrowserRouter>
-)))
+)
 
 const Home = () => (
   <div
@@ -156,13 +151,47 @@ const Exercise = ({
   })
 }
 
-const ExercisePanel = ({ description, exerciseNumber, userSolution, solution }) => (
-  <Fragment>
-    <h1>{getExerciseName(exerciseNumber)}</h1>
+const ExerciseCheck = inject('store')(
+  observer(({ store, exercise, visibleTooltip }) => {
+    const result = store.getExerciseState(exercise)
 
-    {description &&
-      <p>{description}</p>
+    if (result.state === 'passing') {
+      return (
+        <i className="icon ion-md-checkmark ExerciseCheck ExerciseCheck--passing" />
+      )
     }
+
+    if (result.state === 'failing' && result.explicit) {
+      return (
+        <Tooltip
+          duration={0}
+          open={visibleTooltip}
+          position="right"
+          title={result.failureMessage.split('\n')[0].split(' › ')[1]}
+        >
+          <i className="icon ion-md-close ExerciseCheck ExerciseCheck--failing" />
+        </Tooltip>
+      )
+    }
+
+    return null
+  })
+)
+
+const ExercisePanel = ({
+  description,
+  exerciseNumber,
+  userSolution,
+  solution,
+  store,
+}) => (
+  <Fragment>
+    <h1>
+      {getExerciseName(exerciseNumber)}{' '}
+      <ExerciseCheck exercise={exerciseNumber} visibleTooltip />
+    </h1>
+
+    {description && <p>{description}</p>}
 
     <div className="Exercise__row">
       <div className="Exercise__column">

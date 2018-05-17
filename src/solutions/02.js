@@ -56,9 +56,7 @@ const TimeEntry = props => (
     <div className="TimeEntry__project">{props.project}</div>
 
     <div className="TimeEntry__timer">
-      <div className="TimeEntry__timer__time">
-        {formatTime(props.time)}
-      </div>
+      <div className="TimeEntry__timer__time">{formatTime(props.time)}</div>
     </div>
   </div>
 )

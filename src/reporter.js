@@ -11,7 +11,8 @@ const defaultJestConfig = createJestConfig(
   false
 )
 
-defaultJestConfig.transform['^.+\\.(js|jsx|mjs)$'] = '<rootDir>/node_modules/babel-jest'
+defaultJestConfig.transform['^.+\\.(js|jsx|mjs)$'] =
+  '<rootDir>/node_modules/babel-jest'
 
 process.env.NODE_ENV = 'test'
 
@@ -31,32 +32,37 @@ wsServer.on('connection', ws => {
 })
 
 const runTests = debounce(exercise => {
-  jest.runCLI({
-    ...defaultJestConfig,
-    silent: true,
-    env: 'jsdom',
-    reporters: [],
-    noStackTrace: true,
-    _: exercise ? [exercise] : undefined,
-  }, [
-    path.resolve('.')
-  ], ({ testResults }) => {
-    const results = {}
+  jest.runCLI(
+    {
+      ...defaultJestConfig,
+      silent: true,
+      env: 'jsdom',
+      reporters: [],
+      noStackTrace: true,
+      _: exercise ? [exercise] : undefined,
+    },
+    [path.resolve('.')],
+    ({ testResults }) => {
+      const results = {}
 
-    testResults.forEach(testResult => {
-      const exerciseName = testResult.testFilePath.match(/(\d+)\.spec\.js/)[1]
+      testResults.forEach(testResult => {
+        const exerciseName = testResult.testFilePath.match(/(\d+)\.spec\.js/)[1]
 
-      results[exerciseName] = {
-        state: testResult.failureMessage ? 'failing' : 'passing',
-        failureMessage: testResult.failureMessage
-      }
-    })
+        results[exerciseName] = {
+          state: testResult.failureMessage ? 'failing' : 'passing',
+          failureMessage: testResult.failureMessage,
+          explicit: exercise != null,
+        }
+      })
 
-    socket.send(JSON.stringify({
-      type: 'tests-results',
-      data: results
-    }))
-  })
+      socket.send(
+        JSON.stringify({
+          type: 'tests-results',
+          data: results,
+        })
+      )
+    }
+  )
 }, 100)
 
 fs.watch(path.resolve('src/exercises'), (eventType, filename) => {

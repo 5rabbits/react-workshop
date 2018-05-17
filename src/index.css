@@ -85,9 +85,16 @@ a:hover {
   width: 18px;
 }
 
-.App__nav .ion-md-checkmark {
-  color: #5cb85c;
+.ExerciseCheck {
   margin-left: 4px;
+}
+
+.ExerciseCheck--passing {
+  color: #5cb85c;
+}
+
+.ExerciseCheck--failing {
+  color: #d9534f;
 }
 
 .App__content {

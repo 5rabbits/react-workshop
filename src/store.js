@@ -24,16 +24,7 @@ class Store {
   }
 
   getExerciseState(exercise) {
-    const result = this.testsResults[exercise]
-
-    if (!result) {
-      return { state: 'unknown' }
-    }
-
-    return {
-      state: result.failureMessage ? 'failing' : 'passing',
-      failureMessage: result.failureMessage,
-    }
+    return toJS(this.testsResults[exercise]) || { state: 'pending' }
   }
 
   setTestsResults(testsResults) {
@@ -43,7 +34,7 @@ class Store {
 
 decorate(Store, {
   testsResults: observable,
-  setTestsResults: action
+  setTestsResults: action,
 })
 
 export default new Store()
