@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
+import { inject, observer } from 'mobx-react'
 
 const loadMarkdown = require.context(
   '!html-loader!markdown-loader!./',
@@ -92,7 +93,7 @@ const exercises = {
 
 const getExerciseName = number => `Ejercicio ${parseInt(number, 10)}`
 
-const App = () => (
+const App = inject('store')(observer(({ store }) => (
   <BrowserRouter>
     <div className="App">
       <div className="App__wrapper">
@@ -102,11 +103,25 @@ const App = () => (
               Inicio
             </NavLink>
           </li>
-          {Object.keys(exercises).map(exercise => (
-            <li key={exercise}>
-              <NavLink to={`/${exercise}`}>{getExerciseName(exercise)}</NavLink>
-            </li>
-          ))}
+          {Object.keys(exercises).map(exercise => {
+            const exerciseState = store.getExerciseState(exercise)
+
+            return (
+              <li key={exercise}>
+                <NavLink to={`/${exercise}`}>
+                  {getExerciseName(exercise)}
+                  {' '}
+                  {exerciseState.state === 'failing' &&
+                    <i className="icon ion-md-close" />
+                  }
+
+                  {exerciseState.state === 'passing' &&
+                    <i className="icon ion-md-checkmark" />
+                  }
+                </NavLink>
+              </li>
+            )
+          })}
         </ul>
 
         <div className="App__content">
@@ -116,7 +131,7 @@ const App = () => (
       </div>
     </div>
   </BrowserRouter>
-)
+)))
 
 const Home = () => (
   <div
