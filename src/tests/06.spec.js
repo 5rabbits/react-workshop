@@ -52,7 +52,7 @@ import PropTypes from 'prop-types'
 import { shallow, mount } from 'enzyme'
 import TimeEntriesList, { TimeEntry } from '../exercises/06'
 
-describe('Ejercicio 6', () => {
+describe('Ejercicio 06', () => {
   const timeEntries = [
     { id: 1, time: 3600, project: 'React Workshop' },
     { id: 2, time: 18425, project: 'TimeBillingX' },

@@ -28,8 +28,8 @@ const exercises = {
       <ExercisePanel
         description="El trabajo debe mostrar el tiempo correcto."
         exerciseNumber={exerciseNumber}
-        solution={<Solution time={time} />}
-        userSolution={<UserSolution time={time} />}
+        solution={<Solution project="React Workshop" time={time} />}
+        userSolution={<UserSolution project="React Workshop" time={time} />}
       />
     )
   },
@@ -40,8 +40,8 @@ const exercises = {
       <ExercisePanel
         description="Agregar un botón para el timer que cambie de estado al hacer click."
         exerciseNumber={exerciseNumber}
-        solution={<Solution time={time} />}
-        userSolution={<UserSolution time={time} />}
+        solution={<Solution project="React Workshop" time={time} />}
+        userSolution={<UserSolution project="React Workshop" time={time} />}
       />
     )
   },
@@ -52,8 +52,8 @@ const exercises = {
       <ExercisePanel
         description="El tiempo debe incrementar mientras el timer esté activo."
         exerciseNumber={exerciseNumber}
-        solution={<Solution time={time} />}
-        userSolution={<UserSolution time={time} />}
+        solution={<Solution project="React Workshop" time={time} />}
+        userSolution={<UserSolution project="React Workshop" time={time} />}
       />
     )
   },
@@ -167,7 +167,7 @@ const ExerciseCheck = inject('store')(
           duration={0}
           open={visibleTooltip}
           position="right"
-          title={result.failureMessage.split('\n')[0].split(' › ')[1]}
+          title={result.failureMessage.replace(`Ejercicio ${exercise}`, '')}
         >
           <i className="icon ion-md-close ExerciseCheck ExerciseCheck--failing" />
         </Tooltip>

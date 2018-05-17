@@ -97,6 +97,10 @@ a:hover {
   color: #d9534f;
 }
 
+.tippy-tooltip-content {
+  text-align: left;
+}
+
 .App__content {
   margin-left: 5rem;
   flex: 1;

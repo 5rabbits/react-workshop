@@ -51,7 +51,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import TimeEntry from '../exercises/03'
 
-describe('Ejercicio 3', () => {
+describe('Ejercicio 03', () => {
   it('define un estado inicial', () => {
     const component = shallow(<TimeEntry />)
 

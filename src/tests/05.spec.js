@@ -51,7 +51,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import TimeEntriesList, { TimeEntry } from '../exercises/05'
 
-describe('Ejercicio 5', () => {
+describe('Ejercicio 05', () => {
   const timeEntries = [
     { id: 1, time: 3600, project: 'React Workshop' },
     { id: 2, time: 18425, project: 'TimeBillingX' },

@@ -50,7 +50,11 @@ const runTests = debounce(exercise => {
 
         results[exerciseName] = {
           state: testResult.failureMessage ? 'failing' : 'passing',
-          failureMessage: testResult.failureMessage,
+          failureMessage: (
+            testResult.testResults.find(
+              test => test.failureMessages.length > 0
+            ) || {}
+          ).fullName,
           explicit: exercise != null,
         }
       })

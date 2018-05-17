@@ -52,7 +52,7 @@ import PropTypes from 'prop-types'
 import { shallow } from 'enzyme'
 import TimeEntry from '../exercises/02'
 
-describe('Ejercicio 2', () => {
+describe('Ejercicio 02', () => {
   it('valida que la propiedad "time" sea un número', () => {
     expect(TimeEntry.propTypes).toBeDefined()
     expect(TimeEntry.propTypes.time).toBe(PropTypes.number)
