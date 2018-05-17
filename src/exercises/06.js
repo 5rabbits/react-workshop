@@ -57,11 +57,17 @@ export class TimeEntry extends React.Component {
     this.props.onTimerToggle(this.props.id)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.time !== nextProps.time ||
+            this.props.isTimerActive !== nextProps.isTimerActive
+  }
+
   /**
    * ✏️ Este componente ahora no tiene estado, así que solo puedes
    * utilizar props.
    */
   render() {
+    console.log("rendering")
     return (
       <div className="TimeEntry">
         <div className="TimeEntry__project">{this.props.project}</div>
@@ -151,7 +157,9 @@ export default class TimeEntriesList extends React.Component {
       const timeEntry = timeEntries.find((entry) => {
         return entry.id === activeId;
       })
+
       timeEntry.time = timeEntry.time + 1
+
       this.setState({
         timeEntries: timeEntries
       })
