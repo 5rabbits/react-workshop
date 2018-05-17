@@ -80,6 +80,16 @@ a:hover {
   margin-top: 0.5rem;
 }
 
+.App__nav__icon {
+  display: inline-block;
+  width: 18px;
+}
+
+.App__nav .ion-md-checkmark {
+  color: #5cb85c;
+  margin-left: 4px;
+}
+
 .App__content {
   margin-left: 5rem;
   flex: 1;

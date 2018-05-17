@@ -111,13 +111,11 @@ const App = inject('store')(observer(({ store }) => (
                 <NavLink to={`/${exercise}`}>
                   {getExerciseName(exercise)}
                   {' '}
-                  {exerciseState.state === 'failing' &&
-                    <i className="icon ion-md-close" />
-                  }
-
-                  {exerciseState.state === 'passing' &&
-                    <i className="icon ion-md-checkmark" />
-                  }
+                  <span className="App__nav__icon">
+                    {exerciseState.state === 'passing' &&
+                      <i className="icon ion-md-checkmark" />
+                    }
+                  </span>
                 </NavLink>
               </li>
             )
