@@ -6,6 +6,8 @@
  *
  * 🏆 Objetivos:
  *   1. Modifica el componente para que muestre el texto "Hola mundo".
+ *
+ * 🦄 Si te hace falta un tip para este ejercicio, estamos en problemas T_T
  */
 
 import React from 'react'
